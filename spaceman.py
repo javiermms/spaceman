@@ -2,7 +2,7 @@ import random
 
 guessed_right = []
 guessed_wrong =[]
-awnser = []
+answer = []
 
 def load_word():
 	f = open('words.txt', 'r')
@@ -23,21 +23,21 @@ def make_list(word):
 		num += 1
 
 	for char in word:
-		awnser.append(char)
+		answer.append(char)
 
-	return (guessed_right, awnser)
+	return (guessed_right, answer)
 
-def update_list(guessed, guessed_right, awnser):
-	reoccurring_char = awnser.count(guessed)
+def update_list(guessed, guessed_right, answer):
+	reoccurring_char = answer.count(guessed)
 
-	check = awnser.index(guessed)
+	check = answer.index(guessed)
 	guessed_right[check] = guessed
 
 	if reoccurring_char > 1:
 		num = 0
-		while num < len(awnser):
-			if awnser[num] == guessed:
-				guessed_right[num] = awnser[num]
+		while num < len(answer):
+			if answer[num] == guessed:
+				guessed_right[num] = answer[num]
 			num += 1
 
 	return guessed_right
@@ -154,7 +154,7 @@ def draw_man(num):
 def space_man():
 	guessed_incorrect = 7
 
-	while guessed_incorrect != 0 and awnser != guessed_right:
+	while guessed_incorrect != 0 and answer != guessed_right:
 
 		print("Secret Word: " + str(guessed_right))
 		print("Incorrect Words that have been attemped: " + str(guessed_wrong))
@@ -164,12 +164,13 @@ def space_man():
 
 		if len(guess) != 1:
 			print("One letter per guess. Try Again!")
-
-		elif guess in awnser:
-			print("The letter " + guess + " is in the secret word")
-			update_list(guess, guessed_right, awnser)
+		elif guess in answer and not guess in guessed_right:
+			print("\nThe letter " + guess + " is in the secret word")
+			update_list(guess, guessed_right, answer)
+		elif guess in guessed_wrong or guess in guessed_right:
+			print("\nYou have already used the letter " + guess + ".") 
 		else:
-			print("Letter is not in word! Try something else!")
+			print("Letter is not in word!")
 			guessed_incorrect -= 1
 			draw_man(guessed_incorrect)
 			guessed_wrong.append(guess)			
