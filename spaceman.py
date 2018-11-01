@@ -160,7 +160,8 @@ def space_man():
 		print("Incorrect Words that have been attemped: " + str(guessed_wrong))
 		print("Number of incorrect attempts allowed: " + str(guessed_incorrect))
 
-		guess = input("Choose a letter: ")
+		guess = input("Choose a letter: ").lower()
+
 
 		if len(guess) != 1:
 			print("One letter per guess. Try Again!")
@@ -169,6 +170,8 @@ def space_man():
 			update_list(guess, guessed_right, answer)
 		elif guess in guessed_wrong or guess in guessed_right:
 			print("\nYou have already used the letter " + guess + ".") 
+		elif not guess.isalpha():
+			print("Type in a letter in the alphabet!")
 		else:
 			print("Letter is not in word!")
 			guessed_incorrect -= 1
