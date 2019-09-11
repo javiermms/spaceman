@@ -15,14 +15,9 @@ def load_word():
 
 
 def make_list(word):
-	length = len(word)
-	num = 0
-
-	while num < length:
-		guessed_right.append("_")
-		num += 1
 
 	for char in word:
+		guessed_right.append("_")
 		answer.append(char)
 
 	return (guessed_right, answer)
@@ -147,8 +142,8 @@ def draw_man(num):
 |-----|
   /.\
   --- """)
-	else:
-		pass
+	else:l
+
 
 
 def space_man():
@@ -156,8 +151,8 @@ def space_man():
 
 	while guessed_incorrect != 0 and answer != guessed_right:
 
-		print("Secret Word: " + str(guessed_right))
-		print("Incorrect Words that have been attemped: " + str(guessed_wrong))
+		print("Secret Word: " + ' '.join(guessed_right))
+		print("Incorrect Words that have been attemped: " + ' '.join(guessed_wrong))
 		print("Number of incorrect attempts allowed: " + str(guessed_incorrect))
 
 		guess = input("Choose a letter: ").lower()
@@ -183,7 +178,7 @@ def space_man():
 	else:
 		print(guessed_right)
 		print("Congrats you guessed right! You just saved a man from being lauched into SPACE!")
-
+# breaks on line 187
 secret_word = load_word()
 make_list(secret_word)
 space_man()
